@@ -6,7 +6,9 @@ import { pokemons } from "../pokemons";
 const Collection = () => {
   return (
     <div
-      className="w-full h-full flex flex-col justify-center items-center bg-no-repeat bg-cover py-12"
+      className={`w-full ${
+        localStorage.length > 0 ? "h-full" : "h-screen"
+      } flex flex-col justify-center items-center bg-no-repeat bg-cover py-12`}
       style={{
         backgroundImage: `url(${flower})`,
       }}
@@ -18,9 +20,9 @@ const Collection = () => {
       >
         <div
           className={`grid gap-4 ${
-            localStorage.length > 2 ? "lg:grid-cols-3" : "grid-cols-auto"
+            localStorage.length === 2 ? "lg:grid-cols-2" : "grid-cols-auto"
           } ${
-            localStorage.length < 3 ? "lg:grid-cols-2" : "grid-cols-auto"
+            localStorage.length > 2 ? "lg:grid-cols-3" : "grid-cols-auto"
           } lg:grid-rows-auto`}
         >
           {localStorage.length > 0 ? (
@@ -30,7 +32,7 @@ const Collection = () => {
                 return (
                   <div
                     key={index}
-                    className="w-full flex bg-white/50 border-2 border-white rounded-3xl p-6 justify-between items-center"
+                    className="w-full flex bg-white/50 border-2 border-white rounded-3xl p-6 justify-between space-x-4 items-center"
                   >
                     <div className="flex flex-col justify-center items-center">
                       <img
@@ -42,7 +44,7 @@ const Collection = () => {
                         {pokemons[collectedPokemonIdx].name}
                       </h1>
                     </div>
-                    <div className="flex flex-col font-SpaceMono text-sm text-gray-600 mx-1 sm:mx-7">
+                    <div className="flex flex-col font-SpaceMono text-sm text-gray-600">
                       <h1>Hp: {pokemons[collectedPokemonIdx].hp}</h1>
                       <h1>Attack: {pokemons[collectedPokemonIdx].attack}</h1>
                       <h1>Defense: {pokemons[collectedPokemonIdx].defense}</h1>
